@@ -4,7 +4,7 @@ class MyListTileWidget extends StatelessWidget {
   final List<Widget> myListTileContent = const [
     ListTile(
       title: Text(
-        "Ahmad Mufid Risqi",
+        "Ahmad Mufid Risqi 2",
         style: TextStyle(
           color: Colors.white,
         ),
@@ -66,6 +66,8 @@ class MyListTileWidget extends StatelessWidget {
       ),
     ),
   ];
+
+  const MyListTileWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

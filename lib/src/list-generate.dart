@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyListGenerateWidget extends StatelessWidget {
+  const MyListGenerateWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> myTextList = List.generate(

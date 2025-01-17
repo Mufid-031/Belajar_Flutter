@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import './src/text.dart';
-import './src/column.dart';
-import './src/row.dart';
-import './src/stack.dart';
-import './src/list-view.dart';
-import './src/list-generate.dart';
-import './src/list-tile.dart';
-import './src/image.dart';
+// import './src/text.dart';
+// import './src/column.dart';
+// import './src/row.dart';
+// import './src/stack.dart';
+// import './src/list-view.dart';
+// import './src/list-generate.dart';
+// import './src/list-tile.dart';
+// import './src/image.dart';
 import 'package:faker/faker.dart';
 
 void main() {
@@ -49,15 +49,68 @@ class MyApp extends StatelessWidget {
             )
           ],
         ),
-        body: ListView(
-          children: [
-            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
-            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
-            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
-            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
-          ],
+        body: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (context, index) => ContactItem(
+            imageUrl: "https://picsum.photos/id/$index/200/300",
+            title: faker.person.name(),
+            subtitle: faker.lorem.sentence(),
+          ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.greenAccent,
+          child: const Icon(Icons.message_sharp),
+        ),
+        bottomNavigationBar: MyBottomNavigationBarState(),
       ),
+    );
+  }
+}
+
+class MyBottomNavigationBarState extends StatefulWidget {
+  @override
+  _MyBottomNavigationBar createState() => _MyBottomNavigationBar();
+}
+
+class _MyBottomNavigationBar extends State<MyBottomNavigationBarState> {
+  
+  int _currentIndex = 0;
+
+  void _updateIndex(int value) {
+    setState(() {
+      _currentIndex = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: _currentIndex,
+      onTap: _updateIndex,
+      selectedItemColor: Colors.greenAccent,
+      unselectedItemColor: Colors.grey,
+      backgroundColor: Colors.black87,
+      items: const [
+        BottomNavigationBarItem(
+          label: "Chats",
+          icon: Icon(
+            Icons.message_outlined,
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "Komunitas",
+          icon: Icon(
+            Icons.group_outlined,
+          )
+        ),
+        BottomNavigationBarItem(
+          label: "Calls",
+          icon: Icon(
+            Icons.call,
+          )
+        ),
+      ],
     );
   }
 }
@@ -67,13 +120,17 @@ class ContactItem extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  ContactItem({required this.imageUrl, required this.title, required this.subtitle,});
+  ContactItem({
+    required this.imageUrl,
+    required this.title,
+    required this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: AssetImage(imageUrl),
+        backgroundImage: NetworkImage(imageUrl),
       ),
       title: Text(
         title,

@@ -50,13 +50,17 @@ class MyApp extends StatelessWidget {
           ],
         ),
         body: ListView.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) => ContactItem(
-            imageUrl: "https://picsum.photos/id/$index/200/300",
-            title: faker.person.name(),
-            subtitle: faker.lorem.sentence(),
-          ),
-        ),
+            itemCount: 100,
+            itemBuilder: (context, index) => SizedBox(
+                  width: 200,
+                  height: 100,
+                  child: ContactItem(
+                    imageUrl: "https://picsum.photos/id/$index/200/300",
+                    title: faker.person.name(),
+                    subtitle: faker.lorem.sentence(),
+                    trailing: faker.date.dateTime().hour.toString(),
+                  ),
+                )),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           backgroundColor: Colors.greenAccent,
@@ -74,7 +78,6 @@ class MyBottomNavigationBarState extends StatefulWidget {
 }
 
 class _MyBottomNavigationBar extends State<MyBottomNavigationBarState> {
-  
   int _currentIndex = 0;
 
   void _updateIndex(int value) {
@@ -85,33 +88,24 @@ class _MyBottomNavigationBar extends State<MyBottomNavigationBarState> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> labels = ["Chats", "Groups", "Calls"];
+    final List<IconData> icons = [
+      Icons.message_outlined,
+      Icons.group_outlined,
+      Icons.call
+    ];
     return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _updateIndex,
-      selectedItemColor: Colors.greenAccent,
-      unselectedItemColor: Colors.grey,
-      backgroundColor: Colors.black87,
-      items: const [
-        BottomNavigationBarItem(
-          label: "Chats",
-          icon: Icon(
-            Icons.message_outlined,
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: "Komunitas",
-          icon: Icon(
-            Icons.group_outlined,
-          )
-        ),
-        BottomNavigationBarItem(
-          label: "Calls",
-          icon: Icon(
-            Icons.call,
-          )
-        ),
-      ],
-    );
+        currentIndex: _currentIndex,
+        onTap: _updateIndex,
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.black87,
+        items: List.generate(
+            labels.length,
+            (index) => BottomNavigationBarItem(
+                  label: labels[index],
+                  icon: Icon(icons[index]),
+                )));
   }
 }
 
@@ -119,11 +113,13 @@ class ContactItem extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String subtitle;
+  final String trailing;
 
   ContactItem({
     required this.imageUrl,
     required this.title,
     required this.subtitle,
+    required this.trailing,
   });
 
   @override
@@ -146,9 +142,9 @@ class ContactItem extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
-      trailing: const Text(
-        "10.00 PM",
-        style: TextStyle(
+      trailing: Text(
+        "$trailing:00",
+        style: const TextStyle(
           color: Colors.grey,
         ),
       ),

@@ -7,13 +7,14 @@ import './src/list-view.dart';
 import './src/list-generate.dart';
 import './src/list-tile.dart';
 import './src/image.dart';
+import 'package:faker/faker.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  var faker = Faker();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,6 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.black87,
         appBar: AppBar(
-          
           backgroundColor: Colors.black87,
           title: const Text(
             "WhatsApp",
@@ -49,27 +49,50 @@ class MyApp extends StatelessWidget {
             )
           ],
         ),
-        // body: MyListTileWidget(),
-        body: ListView.separated(
-          separatorBuilder: (context, index) {
-            return const Divider(
-              color: Colors.black,
-            );
-          },
-          itemBuilder: (context, index) => const MyImageWidget(),
-          itemCount: 10,
-          // children: const [
-          //   // MyTextWidget(),
-          //   // MyColumnWidget(),
-          //   // MyRowWidget(),
-          //   // MyStackWidget(),
-          //   // MyListViewWidget(),
-          //   // MyListGenerateWidget(),
-          //   MyImageWidget(),
-          //   MyImageWidget(),
-          //   MyImageWidget(),
-          //   MyImageWidget(),
-          // ],
+        body: ListView(
+          children: [
+            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
+            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
+            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
+            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ContactItem extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final String subtitle;
+
+  ContactItem({required this.imageUrl, required this.title, required this.subtitle,});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: AssetImage(imageUrl),
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 17,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: const TextStyle(
+          color: Colors.grey,
+        ),
+      ),
+      trailing: const Text(
+        "10.00 PM",
+        style: TextStyle(
+          color: Colors.grey,
         ),
       ),
     );

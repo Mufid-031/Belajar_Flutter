@@ -9,7 +9,7 @@ import './src/list-tile.dart';
 import './src/image.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -50,16 +50,26 @@ class MyApp extends StatelessWidget {
           ],
         ),
         // body: MyListTileWidget(),
-        body: ListView(
-          children: [
-            // MyTextWidget(),
-            // MyColumnWidget(),
-            // MyRowWidget(),
-            // MyStackWidget(),
-            // MyListViewWidget(),
-            // MyListGenerateWidget(),
-            MyImageWidget(),
-          ],
+        body: ListView.separated(
+          separatorBuilder: (context, index) {
+            return const Divider(
+              color: Colors.black,
+            );
+          },
+          itemBuilder: (context, index) => const MyImageWidget(),
+          itemCount: 10,
+          // children: const [
+          //   // MyTextWidget(),
+          //   // MyColumnWidget(),
+          //   // MyRowWidget(),
+          //   // MyStackWidget(),
+          //   // MyListViewWidget(),
+          //   // MyListGenerateWidget(),
+          //   MyImageWidget(),
+          //   MyImageWidget(),
+          //   MyImageWidget(),
+          //   MyImageWidget(),
+          // ],
         ),
       ),
     );

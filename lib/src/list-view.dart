@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class MyListViewWidget extends StatelessWidget {
   final List<Color> colors = [Colors.red, Colors.green, Colors.yellow];
 
+  MyListViewWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

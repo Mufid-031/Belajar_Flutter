@@ -51,10 +51,10 @@ class MyApp extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
-            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
-            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
-            ContactItem(imageUrl: "images/anby1.png", title: "Anby Demara", subtitle: "Status Tersedia",),
+            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
+            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
+            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
+            ContactItem(imageUrl: "images/anby1.png", title: faker.person.name(), subtitle: faker.job.title(),),
           ],
         ),
       ),

@@ -4,61 +4,73 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyApp createState() => _MyApp();
-}
-
-class _MyApp extends State<MyApp> {
-  int _counter = 1;
-  void _decrementCounter() {
-    if (_counter > 1) {
-      setState(() {
-        _counter--;
-      });
-    }
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyApp extends StatelessWidget {
+  final List<Map<String, dynamic>> myList = [
+    {
+      "name": "Ahmad Mufid Risqi",
+      "age": 20,
+      "colors": ["white", "green", "black"],
+    },
+    {
+      "name": "Imam",
+      "age": 20,
+      "colors": ["red", "blue", "black"],
+    },
+    {
+      "name": "Ridho",
+      "age": 20,
+      "colors": ["orange", "white", "blue"],
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Belajar Flutter"),
+        appBar: AppBar(
+          title: const Center(
+            child: Text("ID Apps"),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "$_counter",
-                style: TextStyle(
-                  fontSize: _counter == 1 ? 10 : 10 + _counter * 2,
-                  fontWeight: FontWeight.bold,
-                  color: _counter < 10 ? Colors.red : Colors.green,
+        ),
+        body: ListView(
+          children: myList.map((e) {
+            List<String> myColors = e["colors"];
+            return Card(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const CircleAvatar(
+                          backgroundColor: Colors.black,
+                        ),
+                        Column(
+                          children: [
+                            Text(e["name"]),
+                            Text(e["age"].toString()),
+                          ],
+                        )
+                      ],
+                    ),
+                    // ListView(
+                    //     scrollDirection: Axis.horizontal,
+                    //     children: myColors
+                    //         .map((e) => Container(
+                    //               width: 100,
+                    //               height: 50,
+                    //               color: Color(int.parse(e, radix: 16)),
+                    //             ))
+                    //         .toList())
+                  ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: _decrementCounter,
-                    child: const Icon(Icons.remove),
-                  ),
-                  TextButton(
-                    onPressed: _incrementCounter,
-                    child: const Icon(Icons.add),
-                  ),
-                ],
-              ),
-            ],
-          )),
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }

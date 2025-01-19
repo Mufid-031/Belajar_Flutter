@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-// import './src/text.dart';
-// import './src/column.dart';
-// import './src/row.dart';
-// import './src/stack.dart';
-// import './src/list-view.dart';
-// import './src/list-generate.dart';
-// import './src/list-tile.dart';
-// import './src/image.dart';
 
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatefulWidget {
   @override
   _MyApp createState() => _MyApp();
 }
 
-
 class _MyApp extends State<MyApp> {
-
   int _counter = 0;
+  void _decrementCounter() {
+    if (_counter > 0) {
+      setState(() {
+        _counter--;
+      });
+    }
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -34,23 +30,28 @@ class _MyApp extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Belajar Flutter"),
-        ),
-        body: Center(
-          child: Text(
-            "$_counter",
-            style: const TextStyle(
-              fontSize: 50,
-            )
+          appBar: AppBar(
+            title: const Text("Belajar Flutter"),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          child: Icon(Icons.add),
-          backgroundColor: Colors.blue,
-        ),
-      ),
+          body: Row(
+            children: [
+              Center(
+                child: Text("$_counter", style: const TextStyle(fontSize: 50)),
+              ),
+              Column(
+                children: [
+                  TextButton(
+                    onPressed: _decrementCounter,
+                    child: const Icon(Icons.remove),
+                  ),
+                  TextButton(
+                    onPressed: _incrementCounter,
+                    child: const Icon(Icons.add),
+                  ),
+                ],
+              )
+            ],
+          )),
     );
   }
 }

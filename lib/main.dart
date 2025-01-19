@@ -10,9 +10,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  int _counter = 0;
+  int _counter = 1;
   void _decrementCounter() {
-    if (_counter > 0) {
+    if (_counter > 1) {
       setState(() {
         _counter--;
       });
@@ -33,12 +33,19 @@ class _MyApp extends State<MyApp> {
           appBar: AppBar(
             title: const Text("Belajar Flutter"),
           ),
-          body: Row(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Text("$_counter", style: const TextStyle(fontSize: 50)),
+              Text(
+                "$_counter",
+                style: TextStyle(
+                  fontSize: _counter == 1 ? 10 : 10 + _counter * 2,
+                  fontWeight: FontWeight.bold,
+                  color: _counter < 10 ? Colors.red : Colors.green,
+                ),
               ),
-              Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
                     onPressed: _decrementCounter,
@@ -49,7 +56,7 @@ class _MyApp extends State<MyApp> {
                     child: const Icon(Icons.add),
                   ),
                 ],
-              )
+              ),
             ],
           )),
     );
